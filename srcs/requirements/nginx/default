@@ -1,0 +1,22 @@
+server {
+	listen 443;
+
+	ssl on;
+	ssl_certificate /etc/ssl/certs/localhost.dev.crt;
+	ssl_certificate_key /etc/ssl/private/localhost.dev.key;
+	ssl_protocols TLSv1.2 TLSv1.3;
+	ssl_ciphers ECDH+AESGCM:DH+AESGCM:ECDH+AES256:DH+AES256:ECDH+AES128:DH+AES:ECDH+3DES:DH+3DES:RSA+AESGCM:RSA+AES:RSA+3DES:!aNULL:!MD5:!DSS;
+	root /var/www/html;
+
+	index index.php index.html index.htm index.php; #index.nginx-debian.html
+	
+	location / {
+		autoindex on;
+		try_files $uri $uri/ =404;
+	}
+	location ~ \.php$ {
+		include snippets/fastcgi-php.conf;
+		fastcgi_pass unix:/var/run/php/php7.3-fpm.sock;
+	}
+
+}

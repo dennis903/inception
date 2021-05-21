@@ -1,0 +1,21 @@
+server {
+	listen 9000;
+
+	ssl on;
+	ssl_certificate /etc/ssl/certs/localhost.dev.crt;
+	ssl_certificate_key /etc/ssl/private/localhost.dev.key;
+
+	root /var/www/html;
+
+	index index.php index.html index.htm index.php; #index.nginx-debian.html
+	
+	location / {
+		autoindex on;
+		try_files $uri $uri/ =404;
+	}
+	location ~ \.php$ {
+		include snippets/fastcgi-php.conf;
+		fastcgi_pass unix:/var/run/php/php7.3-fpm.sock;
+	}
+
+}
