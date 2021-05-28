@@ -1,17 +1,17 @@
 #!/bin/sh
 
-mkdir -p /run/mysqld
+cp ./my.cnf ./etc/mysql/my.cnf
 
-sleep 5
-echo "\033[32minitialize MySQL database...\033[0m"
-mysql_install_db --user=root > /dev/null
+service mysql start
 
-# create wordpress table and give permissions
-echo "CREATE DATABASE IF NOT EXISTS wordpress;
-        FLUSH PRIVILEGES;
-        GRANT ALL PRIVILEGES ON *.* TO 'user'@'%' IDENTIFIED BY 'pass' WITH GRANT OPTION;
-        FLUSH PRIVILEGES;" > cmd.sql
-mysqld -u root --bootstrap < cmd.sql
+echo "CREATE DATABASE IF NOT EXISTS wordpress;" | mysql -u root --skip-password
+echo "GRANT ALL PRIVILEGES ON *.* TO 'wordpress'@'%' IDENTIFIED BY 'wordpress' WITH GRANT OPTION" | mysql -u root --skip-password
+echo "FLUSH PRIVILEGES;" | mysql -u root --skip-password
 
-# Invoking "mysqld" will start the MySQL server. Terminating "mysqld" will shutdown the MySQL server.
-mysqld -u root
+while : true
+
+do
+        sleep 1
+done
+
+bash

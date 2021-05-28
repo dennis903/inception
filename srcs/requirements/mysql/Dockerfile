@@ -1,15 +1,13 @@
-FROM alpine:3.12.0
+FROM debian:buster
 
-RUN apk update \
-		&& apk --update --no-cache add \
-			mysql mysql-client
+RUN 	apt-get update && apt-get -y upgrade \
+		&& apt-get -y install \
+		mariadb-server
 
-# RUN addgroup mysql mysql
-
-COPY ./mysql_setup.sh /usr/sbin/mysql_setup.sh
-RUN chmod +x /usr/sbin/mysql_setup.sh
-COPY my.cnf /etc/my.cnf
-RUN chmod 644 /etc/my.cnf
+COPY	./mysql_setup.sh /usr/sbin/mysql_setup.sh
+RUN 	chmod +x /usr/sbin/mysql_setup.sh
+COPY	./my.cnf ./
+RUN		chmod 644 ./my.cnf
 
 EXPOSE 3306
 

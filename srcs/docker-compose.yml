@@ -6,9 +6,9 @@ services:
       - "443:443"
     restart: always
   db:
-    build: ./requirements/mariadb/
+    build: ./requirements/mysql/
     ports:
-      - "3306:3306"
+      - "3306"
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: wordpress
@@ -20,7 +20,7 @@ services:
       - db
     build: ./requirements/wordpress/
     ports:
-      - "9000:9000"
+      - "9000"
     restart: always
     environment:
        WORDPRESS_DB_HOST: db:3306

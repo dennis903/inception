@@ -9,4 +9,10 @@ cp ./tmp/default etc/nginx/sites-available/
 
 service nginx start
 
+while : true
+
+do
+        sleep 1
+done
+
 bash
