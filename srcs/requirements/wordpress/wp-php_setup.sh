@@ -1,15 +1,13 @@
 #!/bin/bash
 
-mv wordpress /var/www/html/
-chown -R www-data:www-data /var/www/html/wordpress
+chown -R www-data:www-data wordpress
 
-cp ./tmp/wp-config.php /var/www/html/wordpress/
+mkdir -p var/www/html/
+mv ./wordpress /var/www/html/
+mv ./tmp/www.conf /etc/php/7.3/fpm/pool.d/
+cp -rp ./tmp/wp-config.php /var/www/html/wordpress/
+
 service php7.3-fpm start
-
-while : true
-
-do
-        sleep 1
-done
-
+service php7.3-fpm stop
+/usr/sbin/php-fpm7.3 -F
 bash

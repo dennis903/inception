@@ -6,13 +6,10 @@ mv localhost.dev.key etc/ssl/private/
 chmod 600 etc/ssl/certs/localhost.dev.crt etc/ssl/private/localhost.dev.key
 
 cp ./tmp/default etc/nginx/sites-available/
-
-service nginx start
-
-while : true
-
-do
-        sleep 1
-done
-
-bash
+echo "<!DOCTYPE html>" > /var/www/html/wordpress/index.html
+echo "<html>" >> /var/www/html/wordpress/index.html
+echo "<body>" >> /var/www/html/index.html
+echo "<h1>I'm hyeolee hello</h1>" >> /var/www/html/wordpress/index.html
+echo "</body>" >> /var/www/html/wordpress/index.html
+echo "</html>" >> /var/www/html/wordpress/index.html
+/usr/sbin/nginx -g "daemon off;"

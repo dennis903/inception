@@ -4,6 +4,7 @@ LABEL   maintainer="<hyeolee.student.42seoul.kr>"
 
 RUN 	apt-get update && apt-get -y upgrade && apt-get -y install \
 		php-fpm \
+		php-mysql \
 		wget \
 		vim
 RUN 		wget https://wordpress.org/latest.tar.gz

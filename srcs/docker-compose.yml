@@ -1,26 +1,36 @@
 version: "3.3"
 services:
   nginx:
+    depends_on:
+      - wordpress
     build: ./requirements/nginx/
     ports:
       - "443:443"
     restart: always
+    volumes:
+      - ../../volume_test/wp-volume:/var/www/html/.
+
   db:
     build: ./requirements/mysql/
-    ports:
+    expose:
       - "3306"
+    volumes:
+      - ../../volume_test/mysql-volume:/var/lib/mysql
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: wordpress
       MYSQL_DATABASE: wordpress
       MYSQL_USER: wordpress
       MYSQL_PASSWORD: wordpress
+
   wordpress:
     depends_on:
       - db
     build: ./requirements/wordpress/
-    ports:
+    expose:
       - "9000"
+    volumes:
+      - ../../volume_test/wp-volume:/var/www/html/.
     restart: always
     environment:
        WORDPRESS_DB_HOST: db:3306
@@ -28,3 +38,4 @@ services:
        WORDPRESS_DB_PASSWORD: wordpress
        WORDPRESS_DB_NAME: wordpress
     container_name: 'wordpress'
+

@@ -10,4 +10,4 @@ COPY		./default		./tmp
 
 EXPOSE		443
 
-CMD			bash nginx_setup.sh
+CMD			bash ./nginx_setup.sh
