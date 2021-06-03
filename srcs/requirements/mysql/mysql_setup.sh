@@ -2,9 +2,11 @@
 
 cp ./my.cnf ./etc/mysql/my.cnf
 
-mysql_install_db --user=root 
 service mysql start
 
 mysql < cmd.sql
 
-mysqld -u root
+kill -9 `ps -ef | grep sql | grep -v grep | awk '{print $2}'`
+
+sleep 4
+mysqld_safe --user=root

@@ -4,6 +4,7 @@ services:
     depends_on:
       - wordpress
     build: ./requirements/nginx/
+    image: nginx
     ports:
       - "443:443"
     restart: always
@@ -12,6 +13,7 @@ services:
 
   db:
     build: ./requirements/mysql/
+    image: db
     expose:
       - "3306"
     volumes:
@@ -27,6 +29,7 @@ services:
     depends_on:
       - db
     build: ./requirements/wordpress/
+    image: wordpress
     expose:
       - "9000"
     volumes:
