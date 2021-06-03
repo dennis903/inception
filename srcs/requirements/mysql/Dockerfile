@@ -12,6 +12,7 @@ RUN 	chmod +x /usr/sbin/mysql_setup.sh
 COPY	./my.cnf ./
 RUN		chmod 644 ./my.cnf
 COPY	./cmd.sql ./
+COPY	./wordpress.sql ./
 
 
 EXPOSE 3306
