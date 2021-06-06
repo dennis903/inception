@@ -4,41 +4,61 @@ services:
     depends_on:
       - wordpress
     build: ./requirements/nginx/
-    image: nginx
     ports:
       - "443:443"
     restart: always
     volumes:
-      - ../../volume_test/wp-volume:/var/www/html/.
+      - wp-volume:/var/www/html/.
+    networks:
+      - default
 
   db:
     build: ./requirements/mysql/
-    image: db
     expose:
       - "3306"
-    volumes:
-      - ../../volume_test/mysql-volume:/var/lib/mysql
     restart: always
+    volumes:
+      - mysql-volume:/var/lib/mysql      
     environment:
       MYSQL_ROOT_PASSWORD: wordpress
       MYSQL_DATABASE: wordpress
       MYSQL_USER: wordpress
       MYSQL_PASSWORD: wordpress
+    networks:
+      - default
 
   wordpress:
     depends_on:
       - db
     build: ./requirements/wordpress/
-    image: wordpress
     expose:
       - "9000"
     volumes:
-      - ../../volume_test/wp-volume:/var/www/html/.
+      - wp-volume:/var/www/html/.
     restart: always
     environment:
        WORDPRESS_DB_HOST: db:3306
        WORDPRESS_DB_USER: wordpress
        WORDPRESS_DB_PASSWORD: wordpress
        WORDPRESS_DB_NAME: wordpress
+    networks:
+      - default
     container_name: 'wordpress'
 
+volumes:
+  mysql-volume:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: '/Users/hyeolee/volume_test/db'
+  wp-volume:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: '/Users/hyeolee/volume_test/wp'
+
+networks:
+  default:
+    driver: bridge

@@ -1,11 +1,11 @@
 #!/bin/sh
 
-cp ./my.cnf ./etc/mysql/my.cnf
-
+cp -rp ./tmp/my.cnf   ./etc/mysql/my.cnf
 service mysql start
-
-mysql < cmd.sql
-mysql < wordpress.sql
-kill -9 `ps -ef | grep sql | grep -v grep | awk '{print $2}'`
+chown -R mysql:mysql /var/lib/mysql
+chown -R mysql:mysql /var/log/mysql
+/usr/bin/mysql < wordpress.sql
+/usr/bin/mysql < cmd.sql
+kill -9 `ps -elf | grep sql | grep -v grep | awk '{print $4}'`
 sleep 4
 mysqld_safe --user=root
