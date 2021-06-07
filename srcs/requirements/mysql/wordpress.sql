@@ -35,7 +35,7 @@ USE `wordpress`;
 
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `wp_commentmeta` (
+CREATE TABLE IF NOT EXISTS `wp_commentmeta` (
   `meta_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `comment_id` bigint(20) unsigned NOT NULL DEFAULT 0,
   `meta_key` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -62,7 +62,7 @@ UNLOCK TABLES;
 
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `wp_comments` (
+CREATE TABLE IF NOT EXISTS `wp_comments` (
   `comment_ID` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `comment_post_ID` bigint(20) unsigned NOT NULL DEFAULT 0,
   `comment_author` tinytext COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -104,7 +104,7 @@ UNLOCK TABLES;
 
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `wp_links` (
+CREATE TABLE IF NOT EXISTS `wp_links` (
   `link_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `link_url` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `link_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
@@ -139,7 +139,7 @@ UNLOCK TABLES;
 
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `wp_options` (
+CREATE TABLE IF NOT EXISTS `wp_options` (
   `option_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `option_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `option_value` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -167,7 +167,7 @@ UNLOCK TABLES;
 
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `wp_postmeta` (
+CREATE TABLE IF NOT EXISTS `wp_postmeta` (
   `meta_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `post_id` bigint(20) unsigned NOT NULL DEFAULT 0,
   `meta_key` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -195,7 +195,7 @@ UNLOCK TABLES;
 
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `wp_posts` (
+CREATE TABLE IF NOT EXISTS `wp_posts` (
   `ID` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `post_author` bigint(20) unsigned NOT NULL DEFAULT 0,
   `post_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
@@ -244,7 +244,7 @@ UNLOCK TABLES;
 
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `wp_term_relationships` (
+CREATE TABLE IF NOT EXISTS `wp_term_relationships` (
   `object_id` bigint(20) unsigned NOT NULL DEFAULT 0,
   `term_taxonomy_id` bigint(20) unsigned NOT NULL DEFAULT 0,
   `term_order` int(11) NOT NULL DEFAULT 0,
@@ -270,7 +270,7 @@ UNLOCK TABLES;
 
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `wp_term_taxonomy` (
+CREATE TABLE IF NOT EXISTS `wp_term_taxonomy` (
   `term_taxonomy_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `term_id` bigint(20) unsigned NOT NULL DEFAULT 0,
   `taxonomy` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
@@ -300,7 +300,7 @@ UNLOCK TABLES;
 
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `wp_termmeta` (
+CREATE TABLE IF NOT EXISTS `wp_termmeta` (
   `meta_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `term_id` bigint(20) unsigned NOT NULL DEFAULT 0,
   `meta_key` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -327,7 +327,7 @@ UNLOCK TABLES;
 
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `wp_terms` (
+CREATE TABLE IF NOT EXISTS `wp_terms` (
   `term_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `slug` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
@@ -355,7 +355,7 @@ UNLOCK TABLES;
 
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `wp_usermeta` (
+CREATE TABLE IF NOT EXISTS `wp_usermeta` (
   `umeta_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` bigint(20) unsigned NOT NULL DEFAULT 0,
   `meta_key` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -383,7 +383,7 @@ UNLOCK TABLES;
 
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `wp_users` (
+CREATE TABLE IF NOT EXISTS `wp_users` (
   `ID` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `user_login` varchar(60) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `user_pass` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
