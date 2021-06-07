@@ -8,37 +8,37 @@ services:
       - "443:443"
     restart: always
     volumes:
-      - wp-volume:/var/www/html/.
+      - wp:/var/www/html/.
     networks:
       - default
 
-  db:
+  mysql:
     build: ./requirements/mysql/
     expose:
       - "3306"
     restart: always
     volumes:
-      - mysql-volume:/var/lib/mysql      
+      - db:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: wordpress
       MYSQL_DATABASE: wordpress
-      MYSQL_USER: wordpress
+      MYSQL_USER: hyeolee
       MYSQL_PASSWORD: wordpress
     networks:
       - default
 
   wordpress:
     depends_on:
-      - db
+      - mysql
     build: ./requirements/wordpress/
     expose:
       - "9000"
     volumes:
-      - wp-volume:/var/www/html/.
+      - wp:/var/www/html/.
     restart: always
     environment:
-       WORDPRESS_DB_HOST: db:3306
-       WORDPRESS_DB_USER: wordpress
+       WORDPRESS_DB_HOST: mysql:3306
+       WORDPRESS_DB_USER: hyeolee
        WORDPRESS_DB_PASSWORD: wordpress
        WORDPRESS_DB_NAME: wordpress
     networks:
@@ -46,13 +46,14 @@ services:
     container_name: 'wordpress'
 
 volumes:
-  mysql-volume:
+  db:
     driver: local
     driver_opts:
       type: 'none'
       o: 'bind'
       device: '/Users/hyeolee/volume_test/db'
-  wp-volume:
+
+  wp:
     driver: local
     driver_opts:
       type: 'none'
