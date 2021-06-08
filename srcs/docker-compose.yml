@@ -4,6 +4,8 @@ services:
     depends_on:
       - wordpress
     build: ./requirements/nginx/
+    image: nginx
+    container_name: nginx
     ports:
       - "443:443"
     restart: always
@@ -14,6 +16,8 @@ services:
 
   mysql:
     build: ./requirements/mysql/
+    container_name: 'mariadb'
+    image: mysql
     expose:
       - "3306"
     restart: always
@@ -31,6 +35,8 @@ services:
     depends_on:
       - mysql
     build: ./requirements/wordpress/
+    container_name: 'wordpress'
+    image: wordpress
     expose:
       - "9000"
     volumes:
@@ -43,7 +49,6 @@ services:
        WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME}
     networks:
       - default
-    container_name: 'wordpress'
 
 volumes:
   db:
@@ -51,14 +56,14 @@ volumes:
     driver_opts:
       type: 'none'
       o: 'bind'
-      device: '/Users/hyeolee/volume_test/db'
+      device: '/home/hyeolee/data/db'
 
   wp:
     driver: local
     driver_opts:
       type: 'none'
       o: 'bind'
-      device: '/Users/hyeolee/volume_test/wp'
+      device: '/home/hyeolee/data/wp'
 
 networks:
   default:
