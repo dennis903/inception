@@ -17,7 +17,7 @@ services:
   mysql:
     build: ./requirements/mysql/
     container_name: 'mariadb'
-    image: mysql
+    image: mariadb
     expose:
       - "3306"
     restart: always
